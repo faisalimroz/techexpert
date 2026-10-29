@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens (light default, dark via OS or [data-theme]) */
+:root {
+  --bg: #f5faf7;
+  --surface: #ffffff;
+  --surface-2: #eef5f1;
+  --fg: #102b35;
+  --muted: #4c6670;
+  --line: #d9e6df;
+  --head: #075c46;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0a1d24;
+    --surface: #102b35;
+    --surface-2: #143542;
+    --fg: #e6f1ee;
+    --muted: #9ab4bb;
+    --line: #1f4452;
+    --head: #7fe0b2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #0a1d24;
+  --surface: #102b35;
+  --surface-2: #143542;
+  --fg: #e6f1ee;
+  --muted: #9ab4bb;
+  --line: #1f4452;
+  --head: #7fe0b2;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    @apply font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 70;
+    background: #102b35;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid #f5b841;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .gutter {
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+  .shell {
+    @apply mx-auto w-full max-w-[1280px] gutter;
+  }
+  .eyebrow {
+    @apply font-mono text-[11.5px] font-semibold uppercase tracking-[0.16em] text-nature;
+  }
+  .h-section {
+    @apply font-display text-display-lg font-extrabold;
+    color: var(--head);
+  }
+  .lede {
+    color: var(--muted);
+    @apply max-w-[62ch] text-lg leading-relaxed;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    @apply rounded-2xl shadow-card;
+  }
+  .muted {
+    color: var(--muted);
+  }
+  .field {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    @apply w-full rounded-xl px-3.5 py-3 text-[15px] transition focus:border-nature focus:outline-none focus:ring-2 focus:ring-nature/30;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-semibold;
+  }
+  .demo-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-sun/50 bg-sun/15 px-2.5 py-1 font-mono text-[10.5px] font-semibold uppercase tracking-wider text-sun-deep;
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

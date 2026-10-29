@@ -1,0 +1,23 @@
+{
+  "name": "techexpert-energy",
+  "private": true,
+  "version": "0.1.0",
+  "description": "TechExpert Energy — solar, smart energy and industrial IoT platform (MERN + Next.js)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:web": "npm run dev -w @te/web",
+    "dev:api": "npm run dev -w @te/api",
+    "build": "npm run build -w @te/api && npm run build -w @te/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "seed": "npm run seed -w @te/api",
+    "export:preview": "npm run export -w @te/web"
+  }
+}
